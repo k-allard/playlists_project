@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Music project</title>
+
+    <script>
+
+    </script>
+</head>
+<body>
+<h1>Music project</h1>
+
+<iframe name="result" id="dummyframe" style="display: none;"></iframe>
+
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a data-toggle="tab" href="#Playlists">Playlists</a>
+    </li>
+    <li >
+        <a data-toggle="tab" href="#Songs">Songs</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="Playlists" class="tab-pane fade in active">
+        <h3>Playlists</h3>
+
+        <h4>Add</h4>
+        <form class="form-inline" action="http://127.0.0.1:8081/playlist/" method="post" target="result">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <h4>Select</h4>
+        <select multiple class="form-control" >
+            <option
+                    th:each="playlist: ${playlists}"
+                    th:value="${playlist.id}"
+                    th:text="${playlist.name}"></option>
+        </select>
+
+    </div>
+    <div id="Songs" class="tab-pane fade">
+        <h3>Albums</h3>
+        <p>Some content in Albums.</p>
+    </div>
+</div>
+
+
+</body>
+</html>

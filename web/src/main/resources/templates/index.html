@@ -1,0 +1,31 @@
+<!doctype html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Music project</title>
+
+</head>
+<body>
+<h1>Music project</h1>
+<img src="../images/index_picture.png"/>
+<div sec:authorize-url="/music" >
+    <p><a th:href="@{/music}">Music page</a></p>
+</div>
+<div sec:authorize="!isFullyAuthenticated()">
+    <p><a th:href="@{/login}">Log in</a></p>
+    <p><a th:href="@{/registration}">Registration</a></p>
+</div>
+<div sec:authorize-url="/admin">
+    <p><a th:href="@{/admin}">Admin page</a></p>
+</div>
+</body>
+</html>

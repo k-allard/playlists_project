@@ -21,16 +21,8 @@ subprojects {
     }
 
     dependencies {
-        implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
-        implementation ("org.springframework.boot:spring-boot-starter-web")
-        implementation ("org.springframework.boot:spring-boot-starter-security")
-        implementation ("org.springframework.security:spring-security-test")
         implementation ("org.springframework.boot:spring-boot-starter-validation:2.4.0")
         implementation ("org.springframework.data:spring-data-jpa:2.1.9.RELEASE")
-        implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation ("org.springframework.boot:spring-boot-starter-data-rest")
-        implementation ("org.springframework.boot:spring-boot-starter-tomcat")
-        implementation ("org.postgresql:postgresql:42.2.21")
         implementation ("org.springframework.boot:spring-boot-starter-data-jpa")
         implementation ("org.springframework.boot:spring-boot-starter-data-rest")
         implementation ("org.springframework.boot:spring-boot-starter-tomcat")
@@ -40,7 +32,6 @@ subprojects {
         testImplementation ("org.springframework.boot:spring-boot-starter-data-jpa")
         testImplementation ("org.liquibase:liquibase-core")
         developmentOnly ("org.springframework.boot:spring-boot-devtools")
-        runtimeOnly("org.postgresql:postgresql")
 
         // https://projectlombok.org
         compileOnly ("org.projectlombok:lombok:1.18.20")
@@ -53,7 +44,7 @@ subprojects {
     }
 
     java {
-        sourceCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
     }
 
 }

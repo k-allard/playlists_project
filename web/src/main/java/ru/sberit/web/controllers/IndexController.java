@@ -13,8 +13,7 @@ public class IndexController {
     private PlaylistService playlistServiceRest;
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("playlists", playlistServiceRest.getPlaylists());
-        return "music";
+    public String index() {
+        return "index";
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import java.time.Duration;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.sberit.web.model.Playlist;
+import ru.sberit.web.model.Song;
 
 @Service("playlistServiceHttp")
     public class PlaylistService {
@@ -28,6 +29,17 @@ import ru.sberit.web.model.Playlist;
                     .bodyToMono(Playlist[].class)
                     .block(REQUEST_TIMEOUT);
         }
+
+        public Song[] getSongs() {
+        return localApiClient
+                .get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/song/")
+                        .build())
+                .retrieve()
+                .bodyToMono(Song[].class)
+                .block(REQUEST_TIMEOUT);
+    }
 
     //        public Playlist getPlaylist(long id) {
 //            return localApiClient

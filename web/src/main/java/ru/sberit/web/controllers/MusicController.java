@@ -15,6 +15,7 @@ public class MusicController {
     @GetMapping("/music")
     public ResponseEntity.BodyBuilder music(Model model) {
         model.addAttribute("playlists", playlistServiceRest.getPlaylists());
+        model.addAttribute("songs", playlistServiceRest.getSongs());
         return ResponseEntity.ok();
     }
 }

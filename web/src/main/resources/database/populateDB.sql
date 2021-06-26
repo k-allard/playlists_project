@@ -1,18 +1,18 @@
 INSERT
 INTO public."t_role"
-    ("id", "name")
+    ("name")
 VALUES
-    (1, 'ROLE_ADMIN'),
-    (2, 'ROLE_USER')
+    ('ROLE_ADMIN'),
+    ('ROLE_USER')
 ON CONFLICT DO NOTHING
 ;
 
 INSERT
 INTO public."t_user"
-    ("id", "username", "password")
+    ("username", "password")
 VALUES
-    (1, 'admin', '$2a$10$7uWaEoOdIUAaiDORjq1of.MsF44JIbi4g9i8OLOCDt99i1.u.4jHG'),
-    (2, 'user',  '$2a$10$7uWaEoOdIUAaiDORjq1of.MsF44JIbi4g9i8OLOCDt99i1.u.4jHG')
+    ('admin', '$2a$10$7uWaEoOdIUAaiDORjq1of.MsF44JIbi4g9i8OLOCDt99i1.u.4jHG'),
+    ('user',  '$2a$10$7uWaEoOdIUAaiDORjq1of.MsF44JIbi4g9i8OLOCDt99i1.u.4jHG')
 ON CONFLICT DO NOTHING
 ;
 

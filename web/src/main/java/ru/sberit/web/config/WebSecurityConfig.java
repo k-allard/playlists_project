@@ -1,4 +1,4 @@
-package ru.sberit.web.mvcConfig;
+package ru.sberit.web.config;
 
 import ru.sberit.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

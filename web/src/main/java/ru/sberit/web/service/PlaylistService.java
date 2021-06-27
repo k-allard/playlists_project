@@ -1,8 +1,8 @@
 package ru.sberit.web.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 import java.time.Duration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,8 +15,11 @@ import ru.sberit.web.model.Song;
         private final WebClient localApiClient;
 
         @Autowired
-        public PlaylistService() {
-            this.localApiClient = WebClient.create("http://localhost:8081");
+        public PlaylistService(
+                @Value("${web.playlist.Service.URL}")
+                String playlistServiceURL
+        ) {
+            this.localApiClient = WebClient.create(playlistServiceURL);
         }
 
         public Playlist[] getPlaylists() {

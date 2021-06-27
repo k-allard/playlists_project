@@ -1,4 +1,4 @@
-package ru.sberit.web.mvcConfig;
+package ru.sberit.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.CacheControl;

@@ -28,7 +28,7 @@ services:
 
 
   service:
-    build: ./service
+    image: my_image_service
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/music
       SPRING_DATASOURCE_USERNAME: service_ms
@@ -39,7 +39,7 @@ services:
       - 8081:8080
 
   web:
-    build: ./web
+    image: my_image_web
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/auth
       SPRING_DATASOURCE_USERNAME: web_ms

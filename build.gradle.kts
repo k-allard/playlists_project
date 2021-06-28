@@ -17,6 +17,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "io.spring.dependency-management")
     apply(plugin = "org.springframework.boot")
+    apply(plugin = "com.palantir.docker")
 
     repositories {
         mavenCentral()
@@ -55,15 +56,10 @@ tasks.bootRun {
     dependsOn("service:bootRun")
 }
 
-tasks.register("bootJars") {
-    dependsOn("web:bootJar")
-    dependsOn("service:bootJar")
+tasks.register("dockers") {
+    dependsOn("web:docker")
+    dependsOn("service:docker")
     doLast {
-        println("Jar archives assembled!")
+        println("Images built!")
     }
 }
-
-tasks.register("buildImages") {
-    dependsOn("bootJars")
-}
-

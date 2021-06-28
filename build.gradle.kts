@@ -6,6 +6,8 @@ plugins {
     id ("org.springframework.boot") version "2.5.0"
     id ("io.spring.dependency-management") version "1.0.11.RELEASE"
     id ("java")
+    id ("com.palantir.docker") version "0.26.0"
+
 }
 
 group = "ru.sberit"
@@ -46,10 +48,22 @@ subprojects {
     java {
         sourceCompatibility = JavaVersion.VERSION_11
     }
-
 }
 
 tasks.bootRun {
     dependsOn("web:bootRun")
     dependsOn("service:bootRun")
 }
+
+tasks.register("bootJars") {
+    dependsOn("web:bootJar")
+    dependsOn("service:bootJar")
+    doLast {
+        println("Jar archives assembled!")
+    }
+}
+
+tasks.register("buildImages") {
+    dependsOn("bootJars")
+}
+

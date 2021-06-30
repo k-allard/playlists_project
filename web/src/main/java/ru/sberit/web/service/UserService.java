@@ -1,5 +1,7 @@
 package ru.sberit.web.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.sberit.web.entity.Role;
 import ru.sberit.web.entity.User;
 import ru.sberit.web.repository.RoleRepository;
@@ -30,12 +32,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Logger logger = LoggerFactory.getLogger(UserService.class);
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-
+        logger.info("User successfully found");
         return user;
     }
 

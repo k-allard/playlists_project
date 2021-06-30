@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--Аппендеры -->
+    <!--Файловый аппендер 1-->
+    <appender name="toFile1" class="ch.qos.logback.core.FileAppender">
+        <file>file1.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--Файловый аппендер 2-->
+    <appender name="toFileErrors" class="ch.qos.logback.core.FileAppender">
+        <file>errors.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--Консольный аппендер -->
+    <appender name="sout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Логгеры -->
+    <!-- Рутовый логгер -->
+    <root level="info" >
+        <appender-ref ref="sout" />
+    </root>
+    <!-- Логгер в файл 1-->
+    <logger name="moscow.coding.web" level="DEBUG"  >
+        <appender-ref ref="toFile1" />
+    </logger>
+    <!-- Логгер в файл 2 -->
+    <logger name="moscow.coding" level="ERROR"  >
+        <appender-ref ref="toFileErrors" />
+    </logger>
+</configuration>

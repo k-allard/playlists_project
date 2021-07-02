@@ -9,4 +9,4 @@
 
 rootProject.name = "Playlists"
 
-include ("web", "service")
+include ("web", "service", "service-db")

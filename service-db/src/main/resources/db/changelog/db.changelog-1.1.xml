@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="create_song_table" author="Anastisia">
+
+        <createTable tableName="song">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" primaryKeyName="song_id_pk" />
+            </column>
+            <column name="name" type="varchar(250)" />
+
+            <column name="created_at" type="TIMESTAMP WITH TIMEZONE" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false" notNullConstraintName="song_created_at_nn" />
+            </column>
+
+            <column name="playlist_id" type="bigint">
+                <constraints nullable="false" notNullConstraintName="song_playlist_id_nn" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="song_playlist_id_fk"
+                baseTableName="song" baseColumnNames="playlist_id"
+                referencedTableName="playlist" referencedColumnNames="id" />
+
+        <addUniqueConstraint
+                tableName="song"
+                columnNames="playlist_id, name" />
+
+        <sql>
+            GRANT INSERT, SELECT, UPDATE, DELETE ON TABLE public.song TO service_ms;
+
+            GRANT SELECT, USAGE ON SEQUENCE public.song_id_seq TO service_ms;
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>

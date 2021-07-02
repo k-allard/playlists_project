@@ -29,6 +29,8 @@ public class Playlist {
     private BigInteger id;
 
     private String name;
+
+    @Column(name = "user_id")
     private BigInteger userId;
 
     @Column(name = "created_at") // name of the database column this field should be mapped to

@@ -19,13 +19,16 @@ services:
       - postgresql-data:/var/lib/postgresql/data
       - "./config/postgresql/create_auth_db.sh:/docker-entrypoint-initdb.d/create_auth_db.sh"
       - "./config/postgresql/create_music_db.sh:/docker-entrypoint-initdb.d/create_music_db.sh"
-      - "./service/src/main/resources/database/initDB.sql:/sql.tmp/music.init.sql:ro"
-      - "./service/src/main/resources/database/populateDB.sql:/sql.tmp/music.populate.sql:ro"
       - "./web/src/main/resources/database/initDB.sql:/sql.tmp/auth.init.sql:ro"
       - "./web/src/main/resources/database/populateDB.sql:/sql.tmp/auth.populate.sql:ro"
     ports:
       - 65432:5432
 
+  service-migration:
+    image: my_image_service_migration
+    depends_on:
+      - postgres
+    command: --changeLogFile=db.changelog-master.xml --url="jdbc:postgresql://postgres:5432/music?currentSchema=public" --username=service --password=pass --logLevel=INFO update
 
   service:
     image: my_image_service
@@ -35,6 +38,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: pass
     depends_on:
       - postgres
+      - service-migration
     ports:
       - 8081:8080
 

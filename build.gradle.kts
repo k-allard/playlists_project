@@ -59,6 +59,7 @@ tasks.bootRun {
 tasks.register("dockers") {
     dependsOn("web:docker")
     dependsOn("service:docker")
+    dependsOn("service-db:docker")
     doLast {
         println("Images built!")
     }

@@ -27,13 +27,19 @@ public class PlaylistService {
         return playlistRepo.findAll();
     }
 
+    public Iterable<Playlist> getAllPlaylists(BigInteger userId)
+    {
+        return playlistRepo.findByUserId(userId);
+    }
+
     public Playlist getPlaylistById(BigInteger playlistId) {
         return getPlaylist(playlistId);
     }
 
-    public Optional<Playlist> createPlaylist(String name) {
+    public Optional<Playlist> createPlaylist(String name, BigInteger userId) {
         Playlist playlist = new Playlist();
         playlist.setName(name);
+        playlist.setUserId(userId);
         playlist.setCreatedOn(new Date());
         return Optional.of(playlistRepo.save(playlist));
     }

@@ -29,6 +29,7 @@ public class Playlist {
     private BigInteger id;
 
     private String name;
+    private BigInteger userId;
 
     @Column(name = "created_at") // name of the database column this field should be mapped to
     @JsonProperty("created_on") // name of the database column this field should be mapped to

@@ -37,8 +37,10 @@ public class PlaylistRestController {
 	}
 
 	@GetMapping("/all")
-	public Iterable<Playlist> getAllPlaylists() {
-		return service.getAllPlaylists();
+	public Iterable<Playlist> getAllPlaylists(
+			final @RequestParam BigInteger userId
+	) {
+		return service.getAllPlaylists(userId);
 	}
 
 	@GetMapping("/")
@@ -47,8 +49,8 @@ public class PlaylistRestController {
 	}
 
 	@PostMapping("/")
-	public Optional<Playlist> createPlaylist(final @RequestParam String name) {
-		return service.createPlaylist(name);
+	public Optional<Playlist> createPlaylist(final @RequestParam String name, final @RequestParam BigInteger userId) {
+		return service.createPlaylist(name, userId);
 	}
 
 	@DeleteMapping("/")

@@ -27,16 +27,19 @@
 
 <iframe name="result" id="dummyframe" style="display: none;"></iframe>
 
-<h2>Add</h2>
+<h2 th:text="${'Hello, dear ' + username + '!'}" />
+
+<h2>Add playlist</h2>
 <form class="form-inline" action="http://127.0.0.1:8081/playlist/" method="post" target="result">
     <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="name">
+        <input type="hidden" id="userId" name="userId" th:value="${userId}">
     </div>
     <button type="submit" class="btn btn-primary">Add</button>
 </form>
 
-<h2>List</h2>
+<h2>View playlist</h2>
 <div class="accordion" id="accordionPlaylist">
     <div class="accordion-item" th:each="playlist: ${playlists}">
         <h2 class="accordion-header" th:id="${'heading' + playlist.id}">

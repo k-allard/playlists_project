@@ -13,6 +13,10 @@ import ru.sberit.service.model.Song;
 public interface PlaylistRepository extends JpaRepository<Playlist, BigInteger> {
     public Optional<Playlist> findByName(String name);
 
+    public Iterable<Playlist> findByUserId(BigInteger userId);
+
     @Query("select s from Song s where s.playlistId = ?1")
     public Collection<Song> getSongs(BigInteger playlistId);
+
+
 }

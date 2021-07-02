@@ -1,6 +1,7 @@
 package ru.sberit.web.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,6 +44,27 @@ import ru.sberit.web.model.Song;
                     .blockOptional()
                     ;
         }
+
+    public Optional<Song> addSongToPlaylist(String name, BigInteger playlistId)
+    {
+        Song song = new Song();
+        song.setName(name);
+
+        return localApiClient
+                .post()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/playlist/song")
+                        .queryParam("to_playlist", playlistId.toString())
+                        .build())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters
+                        .fromValue(song)
+                        )
+                .retrieve()
+                .bodyToMono(Song.class)
+                .blockOptional()
+                ;
+    }
 
         public Playlist[] getPlaylists(BigInteger userId) {
 

@@ -63,8 +63,19 @@
                         </div>
                     </li>
                 </ol>
+                <div class="input-group mb-3">
+
+                    <form class="form-inline" action="/music" method="post" >
+                        <input type="hidden" name="playlistId" th:value="${playlist.id}" />
+                        <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="New song name" aria-label="New song name" th:aria-describedby="${'button-addon' + playlist.id}"
+                         name="name" required />
+                        <button class="btn btn-outline-secondary" type="submit" th:id="${'button-addon' + playlist.id}">Add</button>
+                        </div>
+                    </form>
 
 
+                </div>
             </div>
         </div>
     </div>

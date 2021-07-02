@@ -15,9 +15,6 @@ public class Song {
 
     private String name;
 
-    @JsonProperty("cover_url") // name of the JSON key during serialization/deserialization
-    private String coverUrl;
-
     @JsonProperty("created_on") // name of the JSON key during serialization/deserialization
     private Date createdOn;
 }

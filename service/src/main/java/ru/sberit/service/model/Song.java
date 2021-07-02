@@ -32,10 +32,6 @@ public class Song {
 
     private String name;
 
-    @Column(name = "cover_url") // name of the database column this field should be mapped to
-    @JsonProperty("cover_url") // name of the JSON key during serialization/deserialization
-    private String coverUrl;
-
     @Column(name = "created_at") // name of the database column this field should be mapped to
     @JsonProperty("created_on") // name of the JSON key during serialization/deserialization
     private Date createdOn;

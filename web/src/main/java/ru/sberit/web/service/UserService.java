@@ -52,15 +52,29 @@ public class UserService implements UserDetailsService {
     }
 
     public boolean saveUser(User user) {
+        Logger logger = LoggerFactory.getLogger(UserService.class);
+        logger.debug("saveUser/findByUsername. start: '{}'", user.getUsername());
         User userFromDB = userRepository.findByUsername(user.getUsername());
+        logger.debug("saveUser/findByUsername. ok");
 
+        logger.debug("saveUser/findByUsername. check");
         if (userFromDB != null) {
+            logger.debug("saveUser/findByUsername. check - ko : '{}', '{}'",
+                    userFromDB.getUsername(), userFromDB.getId());
             return false;
         }
+        logger.debug("saveUser/findByUsername. check - ok");
 
-        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
+
+        logger.debug("saveUser/setRoles. start");
+        user.setRoles(Collections.singleton(roleRepository.findRoleByNameEquals("ROLE_USER")));
+        logger.debug("saveUser/setRoles. ok");
+        logger.debug("saveUser/setPassword. start");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        logger.debug("saveUser/setPassword. ok");
+        logger.debug("saveUser/save. start");
         userRepository.save(user);
+        logger.debug("saveUser/save. ok");
         return true;
     }
 

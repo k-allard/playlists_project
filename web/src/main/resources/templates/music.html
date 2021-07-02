@@ -16,30 +16,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
-    <title>Music project</title>
-
-    <script>
-
-    </script>
+    <title>My Playlist Hub</title>
+    <style>
+        body {
+            padding: 40px;
+        }
+    </style>
 </head>
 <body>
-<h1>Music project</h1>
 
 <iframe name="result" id="dummyframe" style="display: none;"></iframe>
 
-<h2 th:text="${'Hello, dear ' + username + '!'}" />
+<h2 th:text="${username + '''s Playlist Hub'}" />
 
-<h2>Add playlist</h2>
-<form class="form-inline" action="http://127.0.0.1:8081/playlist/" method="post" target="result">
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" name="name">
-        <input type="hidden" id="userId" name="userId" th:value="${userId}">
-    </div>
-    <button type="submit" class="btn btn-primary">Add</button>
-</form>
 
-<h2>View playlist</h2>
+<div class="img-container" th:unless="${playlists.length}">
+    <img src="../images/no_playlists_yet.png" height="100" />
+    <p>Create your first playlist <3</p>
+</div>
+
 <div class="accordion" id="accordionPlaylist">
     <div class="accordion-item" th:each="playlist: ${playlists}">
         <h2 class="accordion-header" th:id="${'heading' + playlist.id}">
@@ -61,7 +56,8 @@
             <div class="accordion-body">
 
                 <ol class="list-group list-group-numbered">
-                    <li class="list-group-item d-flex justify-content-between align-items-start" th:each="song: ${playlist.songs}">
+                    <li class="list-group-item d-flex justify-content-between align-items-start"
+                        th:each="song: ${playlist.songs}">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold" th:text="${song.name}"/>
                         </div>
@@ -74,46 +70,16 @@
     </div>
 </div>
 
-<!--
-<iframe name="result" id="dummyframe" style="display: none;"></iframe>
-
-<ul class="nav nav-tabs">
-    <li class="active">
-        <a data-toggle="tab" href="#Playlists">Playlists</a>
-    </li>
-    <li >
-        <a data-toggle="tab" href="#Songs">Songs</a>
-    </li>
-</ul>
-
-<div class="tab-content">
-    <div id="Playlists" class="tab-pane fade in active">
-        <h3>Playlists</h3>
-
-        <h4>Add</h4>
-        <form class="form-inline" action="http://127.0.0.1:8081/playlist/" method="post" target="result">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name">
-            </div>
-            <button type="submit" class="btn btn-primary">Add</button>
-        </form>
-
-        <h4>Select</h4>
-        <select multiple class="form-control" >
-            <option
-                    th:each="playlist: ${playlists}"
-                    th:value="${playlist.id}"
-                    th:text="${playlist.name}"></option>
-        </select>
-
+<h2>Add playlist</h2>
+<form class="form-inline" action="/music" method="post" id="playlistAddForm">
+    <div class="form-group">
+        <label for="playlistName">Name:</label>
+        <input type="text" class="form-control" id="playlistName" name="playlistName" required>
     </div>
-    <div id="Songs" class="tab-pane fade">
-        <h3>Albums</h3>
-        <p>Some content in Albums.</p>
-    </div>
-</div>
--->
+    <input class="btn btn-primary" type="submit" value="Add">
+</form>
+
+<p><a href="/" th:href="@{/}">Back to home page</a></p>
 
 </body>
 </html>

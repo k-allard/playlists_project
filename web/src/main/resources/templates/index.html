@@ -11,14 +11,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <title>Music project</title>
+    <title>Playlist Hub</title>
 
 </head>
 <body>
-<h1>Music project</h1>
-<img src="../images/index_picture.png"/>
+<h1 align="center">Playlist Hub</h1>
+<img src="../images/index_picture.png" height="500" />
 <div sec:authorize-url="/music" >
-    <p><a th:href="@{/music}">Music page</a></p>
+    <p><a th:href="@{/music}">My playlist collection</a></p>
 </div>
 <div sec:authorize="!isFullyAuthenticated()">
     <p><a th:href="@{/login}">Log in</a></p>

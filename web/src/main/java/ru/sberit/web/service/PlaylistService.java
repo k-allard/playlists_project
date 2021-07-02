@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigInteger;
-import java.security.Principal;
 import java.time.Duration;
+import java.util.Optional;
+
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 import ru.sberit.web.model.Playlist;
 import ru.sberit.web.model.Song;
 
@@ -22,6 +25,23 @@ import ru.sberit.web.model.Song;
                 String playlistServiceURL
         ) {
             this.localApiClient = WebClient.create(playlistServiceURL);
+        }
+
+        public Optional<Playlist> createPlaylist(String name, BigInteger userId)
+        {
+
+            return localApiClient
+                    .post()
+                    .uri(uriBuilder -> uriBuilder
+                            .path("/playlist/")
+                            .build())
+                    .body(BodyInserters
+                            .fromFormData("name", name)
+                            .with("userId", userId.toString()))
+                    .retrieve()
+                    .bodyToMono(Playlist.class)
+                    .blockOptional()
+                    ;
         }
 
         public Playlist[] getPlaylists(BigInteger userId) {

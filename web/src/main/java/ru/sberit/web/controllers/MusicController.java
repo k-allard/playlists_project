@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import ru.sberit.web.model.Song;
 import ru.sberit.web.service.PlaylistService;
 import ru.sberit.web.service.UserService;
 import ru.sberit.web.entity.User;
@@ -44,8 +45,16 @@ public class MusicController {
 
         if(playlistId.isPresent() && name.isPresent())
         {
-            playlistServiceRest.addSongToPlaylist(name.get(), playlistId.get());
-
+            try {
+                Optional<Song> newSong = playlistServiceRest.addSongToPlaylist(name.get(), playlistId.get());
+                if (!newSong.isPresent()) {
+                    model.addAttribute("songError", "A song with this name already exists");
+                    return ResponseEntity.ok();
+                }
+            } catch (Throwable e)
+            {
+                model.addAttribute("songError", e.getMessage());
+            }
         } else if(playlistName.isPresent())
         {
             playlistServiceRest.createPlaylist(playlistName.get(), user.getId());

@@ -73,7 +73,10 @@
                         <button class="btn btn-outline-secondary" type="submit" th:id="${'button-addon' + playlist.id}">Add</button>
                         </div>
                     </form>
-
+                    <div th:if="${param.songError}">
+                        <div class="alert alert-danger" th:text="${param.songError}">
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -6,4 +6,3 @@ docker {
     setName("my_image_service_migration")
     copySpec.from("src/main/resources/db/changelog").into("src/main/resources/db/changelog")
 }
-

@@ -19,16 +19,20 @@
             <column name="name" type="varchar(250)" >
                 <constraints
                         nullable="false" notNullConstraintName="playlist_name_nn"
-                        unique="true" uniqueConstraintName="playlist_name_uniq" />
+                />
             </column>
 
             <column name="user_id" type="bigint">
-                <constraints nullable="false" notNullConstraintName="playlist_user_id_nn" />
+                <constraints
+                        nullable="false" notNullConstraintName="playlist_user_id_nn"
+                />
             </column>
 
-            <column name="created_at" type="TIMESTAMP WITH TIMEZONE" defaultValueComputed="CURRENT_TIMESTAMP">
+            <column name="created_at" type="TIMESTAMP WITH TIMEZONE"
+                    defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints
-                        nullable="false" notNullConstraintName="playlist_created_at_nn" />
+                        nullable="false" notNullConstraintName="playlist_created_at_nn"
+                />
             </column>
 
         </createTable>
